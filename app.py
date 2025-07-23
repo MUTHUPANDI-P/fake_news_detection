@@ -7,7 +7,7 @@ import zipfile
 
 # --- Download and Extract Model from Google Drive ---
 # Replace with your Google Drive FILE_ID
-FILE_ID = "1ZUf1iEc8Kmk1EUKM9zuxkbRUwHL7XMAX"  # Replace with your actual FILE_ID
+FILE_ID = "1TacZ9wRtEBYpsJXTkzxFU0TFS42cV4SS"  # Replace with your actual FILE_ID
 
 MODEL_ZIP = "model.zip"
 MODEL_DIR = "model"
