@@ -3,22 +3,24 @@ from transformers import pipeline
 import torch
 import gdown
 import os
+import zipfile
 
-# --- Download model from Google Drive ---
+# --- Download and Extract Model from Google Drive ---
 # Replace with your Google Drive FILE_ID
-FILE_ID = "1dn8EeVaDUVYtqspyHrIT24f5Vo0pFsWH"  # Example: '1AbCdEfGhIjKlMnOpQrStUvWxYz'
+FILE_ID = "1ZUf1iEc8Kmk1EUKM9zuxkbRUwHL7XMAX"  # Replace with your actual FILE_ID
 
+MODEL_ZIP = "model.zip"
 MODEL_DIR = "model"
-MODEL_PATH = os.path.join(MODEL_DIR, "model.safetensors")
 
-# Create folder if not exists
-os.makedirs(MODEL_DIR, exist_ok=True)
-
-# Download only if model not already present
-if not os.path.exists(MODEL_PATH):
+# Download and extract model only if not already present
+if not os.path.exists(MODEL_DIR):
     with st.spinner("Downloading model..."):
         url = f"https://drive.google.com/uc?id={FILE_ID}"
-        gdown.download(url, MODEL_PATH, quiet=False)
+        gdown.download(url, MODEL_ZIP, quiet=False)
+
+        # Extract the ZIP
+        with zipfile.ZipFile(MODEL_ZIP, 'r') as zip_ref:
+            zip_ref.extractall(MODEL_DIR)
 
 # --- Load Hugging Face pipeline ---
 device = 0 if torch.cuda.is_available() else -1
